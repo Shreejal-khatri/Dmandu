@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 
+//Cart component that displays a sliding sidebar with cart contents
+//Props: isOpen (boolean) - controls visibility, onClose (function) - callback to close cart
 const Cart = ({ isOpen, onClose }) => {
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay - Dark background that appears behind the cart sidebar */}
       {isOpen && (
         <div 
           style={styles.overlay}
@@ -12,13 +14,15 @@ const Cart = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Cart Sidebar */}
+      {/* Cart Sidebar - Slides in from the right side */}
       <div style={{
         ...styles.cartSidebar,
         transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
       }}>
+        {/* Cart Header - Contains title and close button */}
         <div style={styles.cartHeader}>
           <h2 style={styles.cartTitle}>Vendors</h2>
+          {/* Close Icon - X button to close the cart */}
           <FiX 
             style={styles.closeIcon}
             onClick={onClose}
@@ -31,9 +35,12 @@ const Cart = ({ isOpen, onClose }) => {
           />
         </div>
 
+        {/* Cart Content - Main area that displays cart items or empty state */}
         <div style={styles.cartContent}>
+          {/* Empty Cart State - Shown when cart has no items */}
           <div style={styles.emptyCart}>
             <p style={styles.emptyText}>Your cart is currently empty!</p>
+            {/* Start Shopping Button - Closes cart and redirects user to shop */}
             <button 
               style={styles.startShoppingBtn}
               onMouseEnter={(e) => {
@@ -56,6 +63,7 @@ const Cart = ({ isOpen, onClose }) => {
 };
 
 const styles = {
+  //Overlay styles - Semi-transparent dark background
   overlay: {
     position: 'fixed',
     top: 0,
@@ -66,6 +74,7 @@ const styles = {
     zIndex: 1100,
     animation: 'fadeIn 0.3s ease',
   },
+  //Cart sidebar styles - Main container for the cart
   cartSidebar: {
     position: 'fixed',
     top: 0,
@@ -79,6 +88,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
   },
+  //Cart header styles - Top section with title and close button
   cartHeader: {
     padding: '30px',
     borderBottom: '1px solid #e0e0e0',
@@ -86,18 +96,21 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  //Cart title styles - "Vendors" heading
   cartTitle: {
     fontSize: '1.5rem',
     fontWeight: '600',
     margin: 0,
     color: 'black',
   },
+  //Close icon styles - X button styling
   closeIcon: {
     fontSize: '1.8rem',
     cursor: 'pointer',
     color: '#666',
     transition: 'color 0.2s ease',
   },
+  //Cart content styles - Main content area
   cartContent: {
     flex: 1,
     display: 'flex',
@@ -106,6 +119,7 @@ const styles = {
     justifyContent: 'center',
     padding: '40px',
   },
+  //Empty cart container styles - Centers empty state message
   emptyCart: {
     textAlign: 'center',
     display: 'flex',
@@ -113,12 +127,14 @@ const styles = {
     alignItems: 'center',
     gap: '30px',
   },
+  //Empty cart text styles - "Your cart is currently empty!" message
   emptyText: {
     fontSize: '1.2rem',
     fontWeight: '600',
     color: 'black',
     margin: 0,
   },
+  //Start shopping button styles - Call-to-action button
   startShoppingBtn: {
     padding: '14px 40px',
     fontSize: '1rem',
