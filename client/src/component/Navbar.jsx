@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiUser, FiShoppingCart } from 'react-icons/fi';
+import Cart from './Cart'; 
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleLinkHover = (e) => {
     e.target.style.color = '#666';
@@ -22,71 +24,76 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.container}>
-        {/* Logo */}
-        <div 
-          style={styles.logo} 
-          onClick={() => navigate('/')}
-          onMouseEnter={handleLinkHover}
-          onMouseLeave={handleLinkLeave}
-        >
-          Dmandu
-        </div>
+    <>
+      <nav style={styles.navbar}>
+        <div style={styles.container}>
+          {/* Logo */}
+          <div 
+            style={styles.logo} 
+            onClick={() => navigate('/')}
+            onMouseEnter={handleLinkHover}
+            onMouseLeave={handleLinkLeave}
+          >
+            Dmandu
+          </div>
 
-        {/* Navigation Links */}
-        <div style={styles.navLinks}>
-          <a 
-            href="/" 
-            style={styles.link}
-            onMouseEnter={handleLinkHover}
-            onMouseLeave={handleLinkLeave}
-          >
-            Home
-          </a>
-          <a 
-            href="/shop" 
-            style={styles.link}
-            onMouseEnter={handleLinkHover}
-            onMouseLeave={handleLinkLeave}
-          >
-            Shop
-          </a>
-          <a 
-            href="/vendors" 
-            style={styles.link}
-            onMouseEnter={handleLinkHover}
-            onMouseLeave={handleLinkLeave}
-          >
-            Vendors
-          </a>
-          <a 
-            href="/about" 
-            style={styles.link}
-            onMouseEnter={handleLinkHover}
-            onMouseLeave={handleLinkLeave}
-          >
-            About
-          </a>
-        </div>
+          {/* Navigation Links */}
+          <div style={styles.navLinks}>
+            <a 
+              href="/" 
+              style={styles.link}
+              onMouseEnter={handleLinkHover}
+              onMouseLeave={handleLinkLeave}
+            >
+              Home
+            </a>
+            <a 
+              href="/shop" 
+              style={styles.link}
+              onMouseEnter={handleLinkHover}
+              onMouseLeave={handleLinkLeave}
+            >
+              Shop
+            </a>
+            <a 
+              href="/vendors" 
+              style={styles.link}
+              onMouseEnter={handleLinkHover}
+              onMouseLeave={handleLinkLeave}
+            >
+              Vendors
+            </a>
+            <a 
+              href="/about" 
+              style={styles.link}
+              onMouseEnter={handleLinkHover}
+              onMouseLeave={handleLinkLeave}
+            >
+              About
+            </a>
+          </div>
 
-        {/* Icons */}
-        <div style={styles.icons}>
-          <FiUser 
-            style={styles.icon} 
-            onClick={() => navigate('/profile')}
-            onMouseEnter={handleIconHover}
-            onMouseLeave={handleIconLeave}
-          />
-          <FiShoppingCart 
-            style={styles.icon} 
-            onClick={() => navigate('/cart')}
-            onMouseEnter={handleIconHover}
-            onMouseLeave={handleIconLeave}
-          />
+          {/* Icons */}
+          <div style={styles.icons}>
+            <FiUser 
+              style={styles.icon} 
+              onClick={() => navigate('/profile')}
+              onMouseEnter={handleIconHover}
+              onMouseLeave={handleIconLeave}
+            />
+            <FiShoppingCart 
+              style={styles.icon} 
+              onClick={() => setIsCartOpen(true)}
+              onMouseEnter={handleIconHover}
+              onMouseLeave={handleIconLeave}
+            />
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mount the Cart component */}
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </>
   );
 };
 
